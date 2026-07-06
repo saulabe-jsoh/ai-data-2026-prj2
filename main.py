@@ -36,6 +36,13 @@ def map_view():
     alt_diff = abs(point_a['altitude'] - point_b['altitude'])
     distance_3d = (distance_2d**2 + alt_diff**2)**0.5
 
+    # 지상 해상도(GSD)를 고려할 때, 가로*세로 1024(px) 해상도의 위성 또는 드론 이미지는 1픽셀 당
+    # ~ 0.097미터(약 9.7cm)의 픽셀 크기를 가질 때 ~ 100미터의 실제 지형 범위를 명확하게 식별로 확인.
+    # GSD = 실제 범위(100m) / 픽셀 해상도 (1024px) === 0.097 m/pixel
+    # 이 경우 1픽셀당 9.7cm 의 지표면 정보가 담기면, 100m 범위를 1024픽셀로 상세하게 시각화할 수 있음.
+    # 추가적인 지상 표본 거리(Ground Sample Distance) 계산이나 위성 이미지 해상도 기준은 ESA 등 확인가능
+    # Earth Online, Heliguy Guide 참고
+
     return render_template('location_info.html', 
                            a=point_a, 
                            b=point_b, 
