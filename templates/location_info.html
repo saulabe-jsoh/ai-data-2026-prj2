@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지점 간 거리 정보</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .header { background-color: #34495e; color: white; padding: 10px 20px; border-radius: 6px 6px 0 0; margin: -20px -20px 20px -20px; }
+        .info-box { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 6px; background-color: #fafafa; }
+        .result-box { background-color: #e8f4fd; border: 2px solid #3498db; padding: 15px; border-radius: 6px; text-align: center; font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>위치 정보 및 거리 계산</h2>
+    </div>
+
+    <!-- 기준 지점 A 정보 -->
+    <div class="info-box">
+        <strong>📍 기준 위치 (A)</strong>
+        <ul>
+            <li>위도: {{ "%.6f" | format(a.lat) }}</li>
+            <li>경도: {{ "%.6f" | format(a.lon) }}</li>
+            <li>고도: {{ "%.2f" | format(a.altitude) }} m</li>
+        </ul>
+    </div>
+
+    <!-- 기준 지점 B 정보 -->
+    <div class="info-box">
+        <strong>🎯 대상 위치 (B)</strong>
+        <ul>
+            <li>위도: {{ "%.6f" | format(b.lat) }}</li>
+            <li>경도: {{ "%.6f" | format(b.lon) }}</li>
+            <li>고도: {{ "%.2f" | format(b.altitude) }} m</li>
+        </ul>
+    </div>
+
+    <!-- 계산된 거리 정보 표시 -->
+    <div class="result-box">
+        <p>A 지점 기준 B 지점까지의 거리</p>
+        <p style="color: #2980b9;">수평 거리: {{ "%.2f" | format(distance_2d) }} m</p>
+        <p style="color: #c0392b;">고도 차이: {{ "%.2f" | format(alt_diff) }} m</p>
+        <p style="color: #27ae60;">실제 3차원 거리: {{ "%.2f" | format(distance_3d) }} m</p>
+    </div>
+</div>
+
+</body>
+</html>
